@@ -6,7 +6,7 @@ import java.lang.reflect.ParameterizedType;
 /**
  * Created by Nathen on 16/1/5.
  */
-public class PbRequest<T> extends Request<T> {
+public class PbRequest<T> {//extends Request<T>
 
     public void run_T_StaticFunction() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class<T> entityClass = (Class<T>) ((ParameterizedType) BaseMessage.class.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
