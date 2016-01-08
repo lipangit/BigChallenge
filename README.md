@@ -1,11 +1,9 @@
 泛型反射父类的全局函数
 ===================
 
-这个是一个关于java语法的问题,同事们都说没办法
+####这个是一个关于java语法的问题,从工作中的代码抽象出来的,同事们都说没办法
 
-从工作中的代码抽象出来的
-
-结构很简单
+####结构很简单
 
 ```java
 public class BaseMessage {
@@ -21,7 +19,7 @@ public class ArticalMessage extends BaseMessage {
 }
 ```
 
-###这里的两个方法,第二个方法通过传参的方式回避了这个问题,第一个方法想直接反射,却报错
+####这里的两个方法,第二个方法通过传参的方式回避了这个问题,第一个方法想直接反射,却报错
 
 ```java
 public class PbRequest<T extends BaseMessage> {
@@ -40,6 +38,7 @@ public class PbRequest<T extends BaseMessage> {
 }
 ```
 
+####目的很明确让 run_T_StaticFunction() 能通过运行
 ```java
 public class RunMe {
     public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
