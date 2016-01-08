@@ -15,8 +15,7 @@ public class RunMe {
         pb.run_T_StaticFunction(ArticalMessage.class);
 
         //现在的目的是让这个也不报错
-//        BaseMessage baseMessage1 = pb.run_T_StaticFunction();
-//        System.out.println(baseMessage1.params);
+//        pb.run_T_StaticFunction();
 
     }
 
