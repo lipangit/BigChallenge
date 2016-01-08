@@ -41,9 +41,13 @@ public class PbRequest<T extends BaseMessage> {
 ```
 
 ```java
+public class RunMe {
+    public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         PbRequest<ArticalMessage> pb = new PbRequest<>();
         //这个不报错
         pb.run_T_StaticFunction(ArticalMessage.class);
         //现在的目的是让这个也不报错
         //pb.run_T_StaticFunction();
+    }
+}
 ```
