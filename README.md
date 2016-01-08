@@ -5,10 +5,45 @@
 
 从工作中的代码抽象出来的
 
+结构很简单
+
 ```java
-public class PbRequest<T extends BaseMessage> {
-    public void ref(){
-        //在这里把T的全局函数反射出来
+public class BaseMessage {
+    public static String parseFromString(String string) {
+        System.out.println("BaseMessage ref function " + string);
+        return string;
     }
 }
+```
+
+```java
+public class ArticalMessage extends BaseMessage {
+}
+```
+
+###这里的两个方法,第二个方法通过传参的方式回避了这个问题,第一个方法想直接反射,却报错
+
+```java
+public class PbRequest<T extends BaseMessage> {
+    public void run_T_StaticFunction() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Class<T> entityClass = (Class<T>) ((ParameterizedType) BaseMessage.class.getClass().getGenericSuperclass()).getActualTypeArguments()[0];//这行报错
+        java.lang.reflect.Method parseFrom = entityClass.getMethod("parseFromString", String.class);
+        String str = (String) parseFrom.invoke(null, "Some String");
+        System.out.println(str);
+    }
+    public void run_T_StaticFunction(Class<T> entityClass) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+//        Class<T> entityClass = (Class<T>) ((ParameterizedType) BaseMessage.class.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        java.lang.reflect.Method parseFrom = entityClass.getMethod("parseFromString", String.class);
+        String str = (String) parseFrom.invoke(null, "Some String");
+        System.out.println(str);
+    }
+}
+```
+
+```java
+        PbRequest<ArticalMessage> pb = new PbRequest<>();
+        //这个不报错
+        pb.run_T_StaticFunction(ArticalMessage.class);
+        //现在的目的是让这个也不报错
+        //pb.run_T_StaticFunction();
 ```
